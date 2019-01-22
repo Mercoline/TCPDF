@@ -15215,6 +15215,13 @@ class TCPDF {
 			$style['position'] = '';
 			$style['stretch'] = true;
 		}
+		
+		if (!isset($style['textmargin'])) {
+            		$style['textmargin'] = 0;
+        	} else if (!is_numeric($style['textmargin'])) {
+            		$style['textmargin'] = 0;
+        	}
+		
 		if (!isset($style['fitwidth'])) {
 			if (!isset($style['stretch'])) {
 				$style['fitwidth'] = true;
@@ -15447,7 +15454,7 @@ class TCPDF {
 			}
 			// print text
 			$this->x = $xpos_text;
-			$this->y = $y + $vpadding + $barh;
+			$this->y = $y + $vpadding + $barh + $style['textmargin'];
 			$cellpadding = $this->cell_padding;
 			$this->SetCellPadding(0);
 			$this->Cell($txtwidth, '', $label, 0, 0, 'C', false, '', $style['stretchtext'], false, 'T', 'T');
